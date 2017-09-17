@@ -121,8 +121,21 @@ def pingpong(n):
     >>> check(HW_SOURCE_FILE, 'pingpong', ['Assign', 'AugAssign'])
     True
     """
-    "*** YOUR CODE HERE ***"
-
+    def helper_func(c, n, k, d):
+        #c is number to iterate, k is index of number, d is direction to iter
+        if k == n:
+            return c
+        if has_seven(k) or k % 7 == 0:
+            if d:
+                return helper_func(c - 1, n, k + 1, not d) 
+            else:
+                return helper_func(c + 1, n, k + 1, not d)
+        else:
+            if d:
+                return helper_func(c + 1, n, k + 1, d)
+            else:
+                return helper_func(c - 1, n, k + 1, d)
+    return helper_func(1, n, 1, True)
 def has_seven(k):
     """Returns True if at least one of the digits of k is a 7, False otherwise.
 
