@@ -181,14 +181,14 @@ def count_change(amount):
     def count_helper(amount, change_pow):
         if amount == 0:
             return 1
-        if amount  < 0:
+        if amount < 0:
             return 0
-        elif 2 ** change_pow == 0:
+        elif change_pow < 0:
             return 0
         else:
-            return count_helper(amount, change_pow - 1)
-        + count_helper(amount - 2**change_power,change_pow)
-    return count_helper(amount, math.log2(amount))
+            return count_helper(amount, change_pow - 1) + \
+            count_helper(amount - 2**change_pow, change_pow)
+    return count_helper(amount, int(math.log2(amount)))
 
 
 ###################
