@@ -87,8 +87,14 @@ def g_iter(n):
     
     if n <= 3:
         return n
-        
-    return g(n)
+    prev2, prev1, curr = 1,2,3
+    index = 4
+    while index <= n:
+        curr_buffer = curr
+        curr = curr + 2*prev1 + 3*prev2
+        prev2, prev1 = prev1, curr_buffer
+        index += 1
+    return curr
 
 def pingpong(n):
     """Return the nth element of the ping-pong sequence.
@@ -171,7 +177,19 @@ def count_change(amount):
     >>> count_change(100)
     9828
     """
-    "*** YOUR CODE HERE ***"
+    import math
+    def count_helper(amount, change_pow):
+        if amount == 0:
+            return 1
+        if amount  < 0:
+            return 0
+        elif 2 ** change_pow == 0:
+            return 0
+        else:
+            return count_helper(amount, change_pow - 1)
+        + count_helper(amount - 2**change_power,change_pow)
+    return count_helper(amount, math.log2(amount))
+
 
 ###################
 # Extra Questions #
